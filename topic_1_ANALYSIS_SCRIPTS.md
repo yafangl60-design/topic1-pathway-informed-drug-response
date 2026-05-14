@@ -1,0 +1,22 @@
+# Topic 1 Analysis Scripts
+
+This file documents the scripts used to build the Topic 1 manuscript workflow. It is intended for a public code repository or archived release. It describes existing local workflow scripts and does not imply that third-party raw data can be redistributed.
+
+| stage | purpose | scripts |
+| --- | --- | --- |
+| Data inventory and acquisition | Record expected public resources, local file receipts, and source inventories. Raw third-party datasets are not redistributed. | `scripts/audit_topic_1_official_data_links.py`<br>`scripts/check_topic_1_real_data_inventory.py`<br>`scripts/receive_topic_1_gdsc_files.py`<br>`scripts/receive_topic_1_new_depmap_prism_files.py`<br>`scripts/download_topic_1_public_data.py` |
+| GDSC-DepMap harmonization | Construct and audit harmonized drug-cell-line response records and DepMap/CCLE molecular feature links. | `scripts/build_topic_1_gdsc_first_harmonized_table.py`<br>`scripts/link_topic_1_gdsc_to_depmap_expression.py`<br>`scripts/link_topic_1_gdsc_to_depmap_metadata.py`<br>`scripts/link_topic_1_gdsc_to_depmap_compounds.py`<br>`scripts/check_topic_1_data_leakage.py` |
+| Feature construction and frozen dataset | Create the frozen v3 multi-omics feature matrix, feature metadata, sample index, response vector, checksums, and dataset cards. | `scripts/build_topic_1_drug_structure_features.py`<br>`scripts/build_topic_1_multiomics_feature_table_v3.py`<br>`scripts/freeze_topic_1_v3_dataset.py`<br>`scripts/audit_topic_1_frozen_v3_dataset.py`<br>`scripts/create_topic_1_dataset_cards.py` |
+| Internal baseline and proposed candidate model | Train/evaluate standard baselines and the lightweight pathway-informed candidate component under predefined split designs. | `scripts/create_topic_1_baseline_splits.py`<br>`scripts/run_topic_1_full_internal_baseline_v3.py`<br>`scripts/run_topic_1_manuscript_candidate_internal_models.py`<br>`scripts/train_topic_1_proposed_model_v1.py`<br>`scripts/topic_1_prism_proposed_v1_pipeline.py`<br>`scripts/compare_topic_1_baseline_vs_proposed_v1.py` |
+| PRISM candidate external validation | Build high-confidence PRISM validation pairs, align feature columns, score frozen full-GDSC models, and quantify bootstrap/sensitivity diagnostics. | `scripts/design_topic_1_prism_external_validation_mapping.py`<br>`scripts/prepare_topic_1_prism_high_confidence_external_validation_set.py`<br>`scripts/build_topic_1_prism_external_validation_feature_table.py`<br>`scripts/run_topic_1_manuscript_candidate_prism_validation.py`<br>`scripts/analyze_topic_1_prism_bootstrap_sensitivity.py`<br>`scripts/accept_topic_1_codex_prism_precheck.py` |
+| Ablation, calibration, and interpretability | Run sensitivity analyses and pathway-level computational attribution with conservative interpretation boundaries. | `scripts/run_topic_1_no_drug_identity_placeholder_ablation.py`<br>`scripts/run_topic_1_manuscript_candidate_ablation.py`<br>`scripts/analyze_topic_1_manuscript_candidate_calibration_uncertainty.py`<br>`scripts/analyze_topic_1_manuscript_candidate_interpretability.py`<br>`scripts/analyze_topic_1_interpretability_pathway_v1.py` |
+| Literature, novelty, and manuscript preparation | Document WOS novelty pressure, related-work evidence, figures/supplements, Word formatting, and verified reference metadata. | `scripts/import_topic_1_wos_final_check.py`<br>`scripts/audit_topic_1_wos_novelty_risk.py`<br>`scripts/extract_topic_1_wos_top10_pdf_text.py`<br>`scripts/extract_topic_1_wos_top10_fulltext_evidence.py`<br>`scripts/polish_topic_1_figures_supplements_after_fulltext.py`<br>`scripts/finalize_topic_1_user_docx_bmc_format.py`<br>`scripts/verify_topic_1_references_for_zotero.py` |
+
+## Reproducibility Notes
+
+- The main frozen dataset is `data/frozen/topic_1_v3_baseline_20260505/`.
+- The PRISM candidate validation dataset is `data/frozen/topic_1_prism_external_validation_20260505/`.
+- Main manuscript candidate outputs are under `results/topic_1/manuscript_candidate/`.
+- Steady-path-B sensitivity analyses are under `results/topic_1/steady_path_b/`.
+- The scripts above should be run only after obtaining permitted source data from the official providers.
+- Large or licensed third-party raw data should not be uploaded to a public repository unless their license explicitly permits redistribution.
